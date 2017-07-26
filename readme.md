@@ -21,8 +21,8 @@
 * 6. 增加任务 : 任务名称要求是类名，包括包名
 
 
-参考文档 :
-http://blog.csdn.net/u012907049/article/details/70273080
-http://blog.csdn.net/u012907049/article/details/73801122
+#### 参考文档 :
+* http://blog.csdn.net/u012907049/article/details/70273080
+* http://blog.csdn.net/u012907049/article/details/73801122
 
-本项目基于以上文档改造
+###### 本项目基于以上文档提供的项目改造
