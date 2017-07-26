@@ -69,10 +69,10 @@ public final class QuartzUtils {
      */
     public static void jobDelete(String jobClassName, String jobGroupName) throws Exception {
         SchedulerFactory sf = getSchedulerFactory();
-        Scheduler sched = sf.getScheduler();
-        sched.pauseTrigger(TriggerKey.triggerKey(jobClassName, jobGroupName));
-        sched.unscheduleJob(TriggerKey.triggerKey(jobClassName, jobGroupName));
-        sched.deleteJob(JobKey.jobKey(jobClassName, jobGroupName));
+        Scheduler scheduler = sf.getScheduler();
+        scheduler.pauseTrigger(TriggerKey.triggerKey(jobClassName, jobGroupName));
+        scheduler.unscheduleJob(TriggerKey.triggerKey(jobClassName, jobGroupName));
+        scheduler.deleteJob(JobKey.jobKey(jobClassName, jobGroupName));
     }
 
     /**
@@ -123,8 +123,8 @@ public final class QuartzUtils {
      */
     public static void jobPause(String jobClassName, String jobGroupName) throws Exception {
         SchedulerFactory sf = getSchedulerFactory();
-        Scheduler sched = sf.getScheduler();
-        sched.pauseJob(JobKey.jobKey(jobClassName, jobGroupName));
+        Scheduler scheduler = sf.getScheduler();
+        scheduler.pauseJob(JobKey.jobKey(jobClassName, jobGroupName));
     }
 
 
@@ -137,8 +137,8 @@ public final class QuartzUtils {
      */
     public static void jobResume(String jobClassName, String jobGroupName) throws Exception {
         SchedulerFactory sf = getSchedulerFactory();
-        Scheduler sched = sf.getScheduler();
-        sched.resumeJob(JobKey.jobKey(jobClassName, jobGroupName));
+        Scheduler scheduler = sf.getScheduler();
+        scheduler.resumeJob(JobKey.jobKey(jobClassName, jobGroupName));
     }
 
 }
