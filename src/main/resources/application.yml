@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/quartz?useUnicode=true
+    username: root
+    password: Passw0rd
+    driver-class-name: com.mysql.jdbc.Driver
+    
+mybatis: 
+  mapper-locations:
+  - classpath:com/example/demo/mapper/*.xml
+  type-aliases-package: com.example.demo.entity
+    
