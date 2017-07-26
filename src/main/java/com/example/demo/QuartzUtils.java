@@ -85,10 +85,10 @@ public final class QuartzUtils {
      */
     public static void addJob(String jobClassName, String jobGroupName, String cronExpression) throws Exception {
         SchedulerFactory sf = getSchedulerFactory();
-        Scheduler sched = sf.getScheduler();
+        Scheduler scheduler = sf.getScheduler();
 
         // 启动调度器
-        sched.start();
+        scheduler.start();
 
         //构建job信息
         JobDetail jobDetail = JobBuilder.newJob(getClass(jobClassName).getClass()).withIdentity(jobClassName, jobGroupName).build();
@@ -100,7 +100,7 @@ public final class QuartzUtils {
         CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobClassName, jobGroupName).withSchedule(scheduleBuilder).build();
 
         try {
-            sched.scheduleJob(jobDetail, trigger);
+            scheduler.scheduleJob(jobDetail, trigger);
 
         } catch (SchedulerException e) {
             System.out.println("创建定时任务失败" + e);
