@@ -5,23 +5,23 @@
 >
 >     例如： 
 >      
->      `JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
->                       .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
->                       .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
->                       .build();`
->
->
+      `JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
+                    .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
+                    .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
+                    .build();`
+
+
 
 * 2. 其次在job实现类逻辑中获得参数
 >     在execute方法中，传入上下文context，如下所示：
 >      
->        `public void execute(JobExecutionContext context) `
+>>        public void execute(JobExecutionContext context) 
 >      
 >     再获得JobDataMap，从Map中获得所需数据，示例代码如下：
 >      
->         `String jobName = context.getJobDetail().getName();`
->         `JobDataMap dataMap = context.getMergedJobDataMap();`
->         `String strData = dataMap.getString("love");`
+>>         String jobName = context.getJobDetail().getName();
+>>         JobDataMap dataMap = context.getMergedJobDataMap();
+>>         String strData = dataMap.getString("love");
 >                  
 
 
