@@ -28,7 +28,7 @@
 
 2017-07-26
 
-### 学习 SpringBoot + Spring MVC + Quartz + MySQL
+### 初始化创建 SpringBoot + Spring MVC + Quartz + MySQL 学习项目
 
 #### 本工程所用到的技术或工具有：
 * Spring Boot
