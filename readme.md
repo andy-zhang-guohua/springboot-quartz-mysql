@@ -5,11 +5,12 @@
 >
 >     例如： 
 >      
-      `JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
-                    .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
-                    .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
-                    .build();`
-
+>>      JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
+>>                    .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
+>>                    .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
+>>                    .build();
+>>
+>
 
 
 * 2. 其次在job实现类逻辑中获得参数
