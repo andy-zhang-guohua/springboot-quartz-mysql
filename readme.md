@@ -1,11 +1,11 @@
 2017-07-27
-### quartz—向job动态传递参数
+### 向Quartz的Job动态传递参数
 
-* 1. 在运行前传入参数： JobDetail类的getJobDataMap()方法，返回值JobDataMap，可以在此基础上进行Map操作。 
->      
+* 1. 在运行前传入参数： JobDetail类的getJobDataMap()方法，返回值JobDataMap，可以在此基础上进行Map操作。      
 >     例如： 
 >      
 >      job.getJobDataMap().put("love", "I love you very much!"); 
+>
 
 * 2. 其次在job实现类逻辑中获得参数
 >     在execute方法中，传入上下文context，如下所示：
