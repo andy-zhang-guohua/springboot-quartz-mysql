@@ -3,6 +3,8 @@ package org.andy.toolkit.quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by ZhangGuohua on 2017/7/26.
  */
@@ -59,7 +61,7 @@ public final class QuartzUtils {
      * @param cronExpression
      * @throws Exception
      */
-    public static void jobReschedule(String jobClassName, String jobGroupName, String cronExpression) throws Exception {
+    public static void rescheduleCronJob(String jobClassName, String jobGroupName, String cronExpression) {
         try {
             Scheduler scheduler = getScheduler();
             TriggerKey triggerKey = TriggerKey.triggerKey(jobClassName, jobGroupName);
@@ -74,8 +76,7 @@ public final class QuartzUtils {
             // 按新的trigger重新设置job执行
             scheduler.rescheduleJob(triggerKey, trigger);
         } catch (SchedulerException e) {
-            System.out.println("更新定时任务失败" + e);
-            throw new Exception("更新定时任务失败");
+            throw new RuntimeException("更新定时任务失败");
         }
     }
 
@@ -86,11 +87,15 @@ public final class QuartzUtils {
      * @param jobGroupName
      * @throws Exception
      */
-    public static void jobDelete(String jobClassName, String jobGroupName) throws Exception {
+    public static void jobDelete(String jobClassName, String jobGroupName) {
         Scheduler scheduler = getScheduler();
-        scheduler.pauseTrigger(TriggerKey.triggerKey(jobClassName, jobGroupName));
-        scheduler.unscheduleJob(TriggerKey.triggerKey(jobClassName, jobGroupName));
-        scheduler.deleteJob(JobKey.jobKey(jobClassName, jobGroupName));
+        try {
+            scheduler.pauseTrigger(TriggerKey.triggerKey(jobClassName, jobGroupName));
+            scheduler.unscheduleJob(TriggerKey.triggerKey(jobClassName, jobGroupName));
+            scheduler.deleteJob(JobKey.jobKey(jobClassName, jobGroupName));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -101,14 +106,17 @@ public final class QuartzUtils {
      * @param cronExpression
      * @throws Exception
      */
-    public static void addJob(String jobClassName, String jobGroupName, String cronExpression) throws Exception {
+    public static void addCronJob(String jobClassName, String jobGroupName, String cronExpression) throws Exception {
         Scheduler scheduler = getScheduler();
 
         // 启动调度器
         scheduler.start();
 
         //构建job信息
-        JobDetail jobDetail = JobBuilder.newJob(getClass(jobClassName).getClass()).withIdentity(jobClassName, jobGroupName).build();
+        JobDetail jobDetail = JobBuilder.newJob(getClass(jobClassName).getClass()).withIdentity(jobClassName, jobGroupName)
+                .usingJobData("add_thread", Thread.currentThread().getName()) // 缺省参数 1
+                .usingJobData("create_time", LocalDateTime.now().toString()) // 缺省参数 2
+                .build();
 
         //表达式调度构建器(即任务执行的时间)
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
@@ -125,7 +133,7 @@ public final class QuartzUtils {
         }
     }
 
-    public static Job getClass(String classname) throws Exception {
+    private static Job getClass(String classname) throws Exception {
         Class<?> class1 = Class.forName(classname);
         return (Job) class1.newInstance();
     }

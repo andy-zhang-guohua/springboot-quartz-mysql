@@ -1,12 +1,11 @@
 package org.andy.demo.controller;
 
-import org.andy.toolkit.quartz.QuartzUtils;
+import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.andy.demo.entity.JobAndTrigger;
 import org.andy.demo.service.IJobAndTriggerService;
-import com.github.pagehelper.PageInfo;
+import org.andy.toolkit.quartz.QuartzUtils;
 import org.quartz.Scheduler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,8 @@ import java.util.Map;
 /**
  * 当前Controller Bean 实现接口 InitializingBean 用于在Bean实例化后马上执行一段初始化代码 , 见 afterPropertiesSet() 内逻辑
  */
+
+@Slf4j
 @RestController
 @RequestMapping(value = "/job")
 public class JobController implements InitializingBean {
@@ -27,14 +28,11 @@ public class JobController implements InitializingBean {
     @Autowired
     Scheduler scheduler;
 
-    private static Logger log = LoggerFactory.getLogger(JobController.class);
-
-
     @PostMapping(value = "/add-job")
     public void addJob(@RequestParam(value = "jobClassName") String jobClassName,
                        @RequestParam(value = "jobGroupName") String jobGroupName,
                        @RequestParam(value = "cronExpression") String cronExpression) throws Exception {
-        QuartzUtils.addJob(jobClassName, jobGroupName, cronExpression);
+        QuartzUtils.addCronJob(jobClassName, jobGroupName, cronExpression);
     }
 
     @PostMapping(value = "/pause-job")
@@ -52,7 +50,7 @@ public class JobController implements InitializingBean {
     public void rescheduleJob(@RequestParam(value = "jobClassName") String jobClassName,
                               @RequestParam(value = "jobGroupName") String jobGroupName,
                               @RequestParam(value = "cronExpression") String cronExpression) throws Exception {
-        QuartzUtils.jobReschedule(jobClassName, jobGroupName, cronExpression);
+        QuartzUtils.rescheduleCronJob(jobClassName, jobGroupName, cronExpression);
     }
 
 
