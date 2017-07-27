@@ -20,7 +20,7 @@ public class JobAndTriggerImpl implements IJobAndTriggerService {
 	
 	public PageInfo<JobAndTrigger> getJobAndTriggerDetails(int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		List<JobAndTrigger> list = jobAndTriggerMapper.getJobAndTriggerDetails();
+		List<JobAndTrigger> list = jobAndTriggerMapper.getCronJobAndTriggerDetails();
 		PageInfo<JobAndTrigger> page = new PageInfo<JobAndTrigger>(list);
 		return page;
 	}

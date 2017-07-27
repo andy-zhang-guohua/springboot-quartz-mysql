@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>QuartzDemo</title>
+    <title>Quartz Cron Job Manager</title>
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="http://cdn.bootcss.com/vue-resource/1.3.4/vue-resource.js"></script>
@@ -273,7 +273,7 @@
 
             //添加
             add: function () {
-                this.$http.post('job/add-job', {
+                this.$http.post('job/add-cron-job', {
                     "jobClassName": this.form.jobName,
                     "jobGroupName": this.form.jobGroup,
                     "cronExpression": this.form.cronExpression
@@ -296,7 +296,7 @@
             //更新任务
             update: function () {
                 this.$http.post
-                ('job/reschedule-job',
+                ('job/reschedule-cron-job',
                         {
                             "jobClassName": this.updateform.jobName,
                             "jobGroupName": this.updateform.jobGroup,

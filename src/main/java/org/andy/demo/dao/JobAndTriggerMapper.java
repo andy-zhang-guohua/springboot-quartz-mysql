@@ -24,5 +24,5 @@ public interface JobAndTriggerMapper {
             " AND qrtz_job_details.JOB_GROUP = qrtz_triggers.JOB_GROUP " +
             " AND qrtz_triggers.TRIGGER_NAME = qrtz_cron_triggers.TRIGGER_NAME " +
             " AND qrtz_triggers.TRIGGER_GROUP = qrtz_cron_triggers.TRIGGER_GROUP")
-    public List<JobAndTrigger> getJobAndTriggerDetails();
+    public List<JobAndTrigger> getCronJobAndTriggerDetails();
 }

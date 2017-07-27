@@ -28,10 +28,10 @@ public class JobController implements InitializingBean {
     @Autowired
     Scheduler scheduler;
 
-    @PostMapping(value = "/add-job")
-    public void addJob(@RequestParam(value = "jobClassName") String jobClassName,
-                       @RequestParam(value = "jobGroupName") String jobGroupName,
-                       @RequestParam(value = "cronExpression") String cronExpression) throws Exception {
+    @PostMapping(value = "/add-cron-job")
+    public void addCronJob(@RequestParam(value = "jobClassName") String jobClassName,
+                           @RequestParam(value = "jobGroupName") String jobGroupName,
+                           @RequestParam(value = "cronExpression") String cronExpression) throws Exception {
         QuartzUtils.addCronJob(jobClassName, jobGroupName, cronExpression);
     }
 
@@ -46,10 +46,10 @@ public class JobController implements InitializingBean {
     }
 
 
-    @PostMapping(value = "/reschedule-job")
-    public void rescheduleJob(@RequestParam(value = "jobClassName") String jobClassName,
-                              @RequestParam(value = "jobGroupName") String jobGroupName,
-                              @RequestParam(value = "cronExpression") String cronExpression) throws Exception {
+    @PostMapping(value = "/reschedule-cron-job")
+    public void rescheduleCronJob(@RequestParam(value = "jobClassName") String jobClassName,
+                                  @RequestParam(value = "jobGroupName") String jobGroupName,
+                                  @RequestParam(value = "cronExpression") String cronExpression) throws Exception {
         QuartzUtils.rescheduleCronJob(jobClassName, jobGroupName, cronExpression);
     }
 
