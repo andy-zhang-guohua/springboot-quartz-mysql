@@ -17,7 +17,7 @@
 * 2. 在上面创建的数据库中运行doc/quartz.ddl中的SQL
 * 3. 修改配置文件 quartz.properties , application.yml 中的数据库连接参数
 * 4. 运行 Application : Spring Boot工程已经集成了服务器。右键点击 Application.java -> Run As -> Java Application即可运行工程。
-* 5. 默认端口为8080，启动后在浏览器地址栏输入 http://localhost:8080/JobManager.html 就可以看到效果
+* 5. 默认端口为8080，启动后在浏览器地址栏输入 http://localhost:8080/CronJobManager.html 就可以看到效果
 * 6. 增加任务 : 任务名称要求是类名，包括包名
 
 
