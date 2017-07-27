@@ -2,10 +2,10 @@
 ### 向Quartz的Job动态传递参数
 
 * 1. 在运行前传入参数： JobBuilder或者TriggerBuilder对象上调用 usingJobData() .      
->
->     例如： 
->      
-<pre>      JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
+
+<pre> 
+     例如：     
+     JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
                     .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
                     .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
                     .build();
@@ -14,13 +14,14 @@
 
 
 * 2. 其次在job实现类逻辑中获得参数
->     在execute方法中，传入上下文context，如下所示：
+     在execute方法中，传入上下文context，如下所示：
 <pre>      
         public void execute(JobExecutionContext context) 
 </pre>      
->     再获得JobDataMap，从Map中获得所需数据，示例代码如下：
->      
-<pre>         String jobName = context.getJobDetail().getName();
+     再获得JobDataMap，从Map中获得所需数据，示例代码如下：
+      
+<pre>  
+         String jobName = context.getJobDetail().getName();
          JobDataMap dataMap = context.getMergedJobDataMap();
          String strData = dataMap.getString("love");
 </pre>                  
