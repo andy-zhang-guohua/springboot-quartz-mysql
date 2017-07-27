@@ -1,4 +1,4 @@
-package com.example.demo.job;
+package org.andy.demo.job;
 
 import java.util.Date;  
 import org.slf4j.Logger;  

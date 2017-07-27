@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package org.andy.demo.service;
 
 
-import com.example.demo.entity.JobAndTrigger;
+import org.andy.demo.entity.JobAndTrigger;
 import com.github.pagehelper.PageInfo;
 
 public interface IJobAndTriggerService {

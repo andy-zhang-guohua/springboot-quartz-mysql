@@ -1,4 +1,4 @@
-package com.example.demo.entity;
+package org.andy.demo.entity;
 
 import java.math.BigInteger;
 

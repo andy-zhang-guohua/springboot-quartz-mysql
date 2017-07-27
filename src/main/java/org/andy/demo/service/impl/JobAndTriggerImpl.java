@@ -1,19 +1,19 @@
-package com.example.demo.service.impl;
+package org.andy.demo.service.impl;
 
 import java.util.List;
 
+import org.andy.demo.entity.JobAndTrigger;
+import org.andy.demo.service.IJobAndTriggerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.dao.JobAndTriggerMapper;
-import com.example.demo.entity.JobAndTrigger;
-import com.example.demo.service.IJobAndTriggerService;
+import org.andy.demo.dao.JobAndTriggerMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
 @Service
-public class JobAndTriggerImpl implements IJobAndTriggerService{
+public class JobAndTriggerImpl implements IJobAndTriggerService {
 
 	@Autowired
 	private JobAndTriggerMapper jobAndTriggerMapper;

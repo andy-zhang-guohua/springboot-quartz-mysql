@@ -38,14 +38,14 @@
         >
             <el-table-column
                     prop="job_NAME"
-                    label="任务名称"
+                    label="任务名称(全类名)"
                     sortable
                     show-overflow-tooltip>
             </el-table-column>
 
             <el-table-column
                     prop="job_GROUP"
-                    label="任务所在组"
+                    label="任务分组"
                     sortable>
             </el-table-column>
 
@@ -63,7 +63,7 @@
 
             <el-table-column
                     prop="trigger_GROUP"
-                    label="触发器所在组"
+                    label="触发器分组"
                     sortable>
             </el-table-column>
 
@@ -136,7 +136,7 @@
 
     <el-dialog title="添加任务" v-model="dialogFormVisible">
         <el-form :model="form">
-            <el-form-item label="任务名称" label-width="120px" style="width:35%">
+            <el-form-item label="任务名称(全类名)" label-width="120px" style="width:35%">
                 <el-input v-model="form.jobName" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="任务分组" label-width="120px" style="width:35%">
@@ -216,7 +216,7 @@
 
             //从服务器读取数据
             loadData: function (pageNum, pageSize) {
-                this.$http.get('job/queryjob?' + 'pageNum=' + pageNum + '&pageSize=' + pageSize).then(function (res) {
+                this.$http.get('job/query-job?' + 'pageNum=' + pageNum + '&pageSize=' + pageSize).then(function (res) {
                     console.log(res)
                     this.tableData = res.body.JobAndTrigger.list;
                     this.totalCount = res.body.number;
@@ -227,7 +227,7 @@
 
             //单行删除
             handleDelete: function (index, row) {
-                this.$http.post('job/deletejob', {
+                this.$http.post('job/delete-job', {
                     "jobClassName": row.job_NAME,
                     "jobGroupName": row.job_GROUP
                 }, {emulateJSON: true}).then(function (res) {
@@ -239,7 +239,7 @@
 
             //暂停任务
             handlePause: function (index, row) {
-                this.$http.post('job/pausejob', {
+                this.$http.post('job/pause-job', {
                     "jobClassName": row.job_NAME,
                     "jobGroupName": row.job_GROUP
                 }, {emulateJSON: true}).then(function (res) {
@@ -251,7 +251,7 @@
 
             //恢复任务
             handleResume: function (index, row) {
-                this.$http.post('job/resumejob', {
+                this.$http.post('job/resume-job', {
                     "jobClassName": row.job_NAME,
                     "jobGroupName": row.job_GROUP
                 }, {emulateJSON: true}).then(function (res) {
@@ -273,7 +273,7 @@
 
             //添加
             add: function () {
-                this.$http.post('job/addjob', {
+                this.$http.post('job/add-job', {
                     "jobClassName": this.form.jobName,
                     "jobGroupName": this.form.jobGroup,
                     "cronExpression": this.form.cronExpression
@@ -296,7 +296,7 @@
             //更新任务
             update: function () {
                 this.$http.post
-                ('job/reschedulejob',
+                ('job/reschedule-job',
                         {
                             "jobClassName": this.updateform.jobName,
                             "jobGroupName": this.updateform.jobGroup,
