@@ -1,11 +1,14 @@
 2017-07-27
 ### 向Quartz的Job动态传递参数
 
-* 1. 在运行前传入参数： JobDetail类的getJobDataMap()方法，返回值JobDataMap，可以在此基础上进行Map操作。      
+* 1. 在运行前传入参数： JobBuilder或者TriggerBuilder对象上调用 usingJobData() .      
 >
 >     例如： 
 >      
->      `job.getJobDataMap().put("love", "I love you very much!"); `
+>      `JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
+>                       .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
+>                       .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
+>                       .build();`
 >
 >
 
@@ -17,7 +20,7 @@
 >     再获得JobDataMap，从Map中获得所需数据，示例代码如下：
 >      
 >         `String jobName = context.getJobDetail().getName();`
->         `JobDataMap dataMap = context.getJobDetail().getJobDataMap();`
+>         `JobDataMap dataMap = context.getMergedJobDataMap();`
 >         `String strData = dataMap.getString("love");`
 >                  
 

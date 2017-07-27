@@ -71,7 +71,10 @@ public final class QuartzUtils {
             CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
 
             // 按新的cronExpression表达式重新构建trigger
-            trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
+            trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder)
+                    .usingJobData("trigger_add_thread", Thread.currentThread().getName()) // 缺省参数 1
+                    .usingJobData("trigger_create_time", LocalDateTime.now().toString()) // 缺省参数 2
+                    .build();
 
             // 按新的trigger重新设置job执行
             scheduler.rescheduleJob(triggerKey, trigger);
@@ -114,15 +117,18 @@ public final class QuartzUtils {
 
         //构建job信息
         JobDetail jobDetail = JobBuilder.newJob(getClass(jobClassName).getClass()).withIdentity(jobClassName, jobGroupName)
-                .usingJobData("add_thread", Thread.currentThread().getName()) // 缺省参数 1
-                .usingJobData("create_time", LocalDateTime.now().toString()) // 缺省参数 2
+                .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
+                .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
                 .build();
 
         //表达式调度构建器(即任务执行的时间)
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 
         //按新的cronExpression表达式构建一个新的trigger
-        CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobClassName, jobGroupName).withSchedule(scheduleBuilder).build();
+        CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobClassName, jobGroupName).withSchedule(scheduleBuilder)
+                .usingJobData("trigger_add_thread", Thread.currentThread().getName()) // 缺省参数 1
+                .usingJobData("trigger_create_time", LocalDateTime.now().toString()) // 缺省参数 2
+                .build();
 
         try {
             scheduler.scheduleJob(jobDetail, trigger);

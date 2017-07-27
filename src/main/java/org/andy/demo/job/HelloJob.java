@@ -15,6 +15,6 @@ public class HelloJob implements BaseJob {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         log.info("Hello Job执行时间: " + new Date());
 
-        log.info("JobDataMap 参数 : {}", context.getJobDetail().getJobDataMap().getWrappedMap());
+        log.info("JobDataMap 参数 : {}", context.getMergedJobDataMap().getWrappedMap());
     }
 }  

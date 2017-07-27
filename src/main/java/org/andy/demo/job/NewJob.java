@@ -15,6 +15,6 @@ public class NewJob implements BaseJob {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         log.info("New Job执行时间: " + new Date());
 
-        log.info("JobDataMap 参数 : {}", context.getJobDetail().getJobDataMap().getWrappedMap());
+        log.info("JobDataMap 参数 : {}", context.getMergedJobDataMap().getWrappedMap());
     }
 }  
