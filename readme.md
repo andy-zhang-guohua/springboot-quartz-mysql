@@ -5,8 +5,8 @@
 
 <pre>      
      JobDetail jobDetail = JobBuilder.newJob(...).withIdentity(jobClassName, jobGroupName)
-                    .usingJobData("job_add_thread", Thread.currentThread().getName()) // 缺省参数 1
-                    .usingJobData("job_create_time", LocalDateTime.now().toString()) // 缺省参数 2
+                    .usingJobData("order_id", 201707271745001L) // 参数 1
+                    .usingJobData("user_name", "Tom") // 参数 2
                     .build();
 </pre>
 
